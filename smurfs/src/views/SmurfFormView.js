@@ -16,7 +16,6 @@ class FriendForm extends Component {
   }
 
   componentDidMount = () => {
-    console.log("In form: ", this.props.currentSmurf)
     if (this.props.currentSmurf) {
       const smurf = this.props.smurfs.find(
         smurf => smurf.id === this.props.currentSmurf.id
