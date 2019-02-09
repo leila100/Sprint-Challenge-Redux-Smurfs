@@ -19,6 +19,9 @@ import axios from "axios"
 export const FETCHING = "FETCHING"
 export const FETCHED = "FETCHED"
 export const ERROR = "ERROR"
+export const SAVING = "SAVING"
+export const SAVED = "SAVED"
+export const SHOW_FORM = "SHOW_FORM"
 
 export function fetchSmurfs() {
   return dispatch => {
@@ -30,6 +33,24 @@ export function fetchSmurfs() {
       })
       .catch(error => {
         dispatch({ type: ERROR, payload: "Can't fetch the smurfs!" })
+      })
+  }
+}
+
+export function showForm(actionType) {
+  return { type: SHOW_FORM, actionType: actionType }
+}
+
+export function addSmurf(smurf) {
+  return dispatch => {
+    dispatch({ type: SAVING })
+    axios
+      .post("http://localhost:3333/smurfs", smurf)
+      .then(response => {
+        dispatch({ type: SAVED, payload: response.data })
+      })
+      .catch(error => {
+        dispatch({ type: ERROR, payload: "Can't add the smurf!" })
       })
   }
 }
