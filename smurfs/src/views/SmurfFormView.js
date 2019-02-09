@@ -10,7 +10,8 @@ class FriendForm extends Component {
     this.state = {
       name: "",
       age: undefined,
-      height: undefined
+      height: undefined,
+      canSubmit: false
     }
   }
 
@@ -37,6 +38,8 @@ class FriendForm extends Component {
 
   saveInput = event => {
     this.setState({ [event.target.name]: event.target.value })
+    if (this.state.name && this.state.age && this.state.height)
+      this.setState({ canSubmit: true })
   }
 
   render() {
@@ -63,7 +66,9 @@ class FriendForm extends Component {
           value={this.state.height}
           onChange={this.saveInput}
         />
-        <Button type="submit">{this.props.action} Smurf</Button>
+        <Button type="submit" disabled={!this.state.canSubmit}>
+          {this.props.action} Smurf
+        </Button>
       </Form>
     )
   }
