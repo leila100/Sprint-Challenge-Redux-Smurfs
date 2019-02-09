@@ -11,3 +11,7 @@ body {
   padding: 0;
   background-color: #f9f9f9;
 }
+h1 {
+  font-size: 4rem;
+  text-align: center;
+}

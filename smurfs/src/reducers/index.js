@@ -14,7 +14,16 @@
  }
 */
 
-import { FETCHING, FETCHED, ERROR, SAVING, SAVED, SHOW_FORM } from "../actions"
+import {
+  FETCHING,
+  FETCHED,
+  ERROR,
+  SAVING,
+  SAVED,
+  SHOW_FORM,
+  DELETING,
+  DELETED
+} from "../actions"
 
 const initialState = {
   smurfs: [],
@@ -71,6 +80,23 @@ export default function rootReducer(state = initialState, action) {
     case SAVED:
       return {
         ...state,
+        addingSmurf: false,
+        fetchingSmurfs: false,
+        error: null,
+        smurfs: action.payload
+      }
+    case DELETING:
+      return {
+        ...state,
+        deletingSmurf: true,
+        addingSmurf: false,
+        fetchingSmurfs: false,
+        error: null
+      }
+    case DELETED:
+      return {
+        ...state,
+        deletingSmurf: false,
         addingSmurf: false,
         fetchingSmurfs: false,
         error: null,

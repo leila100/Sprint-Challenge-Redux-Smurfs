@@ -16,7 +16,6 @@ export const SmurfsWrapper = styled.div`
 export const SmurfWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
   width: 40%;
   margin: 5px auto;
   border-bottom: 1px solid #8dbfb7;
@@ -27,11 +26,24 @@ export const SmurfWrapper = styled.div`
 export const SmurfInfo = styled.div`
   font-size: 1.5rem;
   display: flex;
+  flex-direction: column;
   width: 100%;
   line-height: 1.7;
 
   span {
     font-weight: bold;
-    margin-right: 10px;
+  }
+`
+
+export const IconsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  i {
+    margin: 0 10px;
+    font-size: 2.2rem;
+    color: #8dbfb7;
   }
 `

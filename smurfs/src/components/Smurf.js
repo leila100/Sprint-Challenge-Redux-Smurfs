@@ -1,24 +1,43 @@
 import React from "react"
+import { connect } from "react-redux"
 
-import { SmurfWrapper, SmurfInfo } from "../styles/SmurfListStyles"
+import { deleteSmurf } from "../actions"
+
+import {
+  SmurfWrapper,
+  SmurfInfo,
+  IconsWrapper
+} from "../styles/SmurfListStyles"
 
 const Smurf = props => {
   return (
     <SmurfWrapper>
       <SmurfInfo>
-        <span>Name: </span>
-        {props.smurf.name}
+        <div>
+          <span>Name: </span>
+          {props.smurf.name}
+        </div>
+        <div>
+          <span>Age: </span>
+          {props.smurf.age}
+        </div>
+        <div>
+          <span>Height: </span>
+          {props.smurf.height}
+        </div>
       </SmurfInfo>
-      <SmurfInfo>
-        <span>Age: </span>
-        {props.smurf.age}
-      </SmurfInfo>
-      <SmurfInfo>
-        <span>Height: </span>
-        {props.smurf.height}
-      </SmurfInfo>
+      <IconsWrapper>
+        <i className="fas fa-user-edit" />
+        <i
+          className="fas fa-user-minus"
+          onClick={() => props.deleteSmurf(props.smurf.id)}
+        />
+      </IconsWrapper>
     </SmurfWrapper>
   )
 }
 
-export default Smurf
+export default connect(
+  null,
+  { deleteSmurf }
+)(Smurf)
