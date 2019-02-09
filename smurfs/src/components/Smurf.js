@@ -1,12 +1,23 @@
 import React from "react"
 
+import { SmurfWrapper, SmurfInfo } from "../styles/SmurfListStyles"
+
 const Smurf = props => {
   return (
-    <div>
-      <div>{props.smurf.name}</div>
-      <div>{props.smurf.age}</div>
-      <div>{props.smurf.height}</div>
-    </div>
+    <SmurfWrapper>
+      <SmurfInfo>
+        <span>Name: </span>
+        {props.smurf.name}
+      </SmurfInfo>
+      <SmurfInfo>
+        <span>Age: </span>
+        {props.smurf.age}
+      </SmurfInfo>
+      <SmurfInfo>
+        <span>Height: </span>
+        {props.smurf.height}
+      </SmurfInfo>
+    </SmurfWrapper>
   )
 }
 

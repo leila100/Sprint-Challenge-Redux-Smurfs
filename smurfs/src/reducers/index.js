@@ -72,6 +72,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         addingSmurf: false,
+        fetchingSmurfs: false,
         error: null,
         smurfs: action.payload
       }

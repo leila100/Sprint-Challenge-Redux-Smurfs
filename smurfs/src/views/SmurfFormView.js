@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 
 import { addSmurf } from "../actions"
+import { Button, Form } from "../styles/formStyles"
 
 class FriendForm extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class FriendForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.action}>
+      <Form onSubmit={this.action}>
         <input
           type="text"
           name="name"
@@ -46,8 +47,8 @@ class FriendForm extends Component {
           value={this.state.height}
           onChange={this.saveInput}
         />
-        <button type="submit">{this.props.action} Smurf</button>
-      </form>
+        <Button type="submit">{this.props.action} Smurf</Button>
+      </Form>
     )
   }
 }
