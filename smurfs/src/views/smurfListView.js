@@ -34,7 +34,13 @@ class SmurfList extends Component {
             <Smurf key={smurf.id} smurf={smurf} />
           ))}
         </SmurfsWrapper>
-        <Button onClick={() => this.props.showForm("Add")}>Add Smurf</Button>
+        <Button
+          disabled={this.props.form ? true : false}
+          onClick={() => this.props.showForm("Add")}
+          removeIfDisabled
+        >
+          Add Smurf
+        </Button>
       </SmurfsListWrapper>
     )
   }
