@@ -16,13 +16,19 @@ class SmurfList extends Component {
   render() {
     return (
       <SmurfsListWrapper>
-        <Message>
+        <Message error>
           {this.props.error !== null && <h2>{this.props.error}</h2>}
         </Message>
         <Message>
           {this.props.fetching && <h2>Loading the smurfs!!</h2>}
         </Message>
         <Message>{this.props.adding && <h2>Adding the smurf!!</h2>}</Message>
+        <Message>
+          {this.props.deleting && <h2>Deleting your friend</h2>}
+        </Message>
+        <Message>
+          {this.props.updating && <h2>Updating your friend</h2>}
+        </Message>
         <SmurfsWrapper>
           {this.props.smurfs.map(smurf => (
             <Smurf key={smurf.id} smurf={smurf} />
@@ -40,7 +46,9 @@ const mapStateToProps = state => {
     fetching: state.fetchingSmurfs,
     error: state.error,
     form: state.showForm,
-    adding: state.addingSmurf
+    adding: state.addingSmurf,
+    deleting: state.deletingSmurf,
+    updating: state.updatingSmurf
   }
 }
 

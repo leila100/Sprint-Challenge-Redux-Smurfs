@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { addSmurf } from "../actions"
+import { addSmurf, updateSmurf } from "../actions"
 import { Button, Form } from "../styles/formStyles"
 
 class FriendForm extends Component {
@@ -14,9 +14,25 @@ class FriendForm extends Component {
     }
   }
 
+  componentDidMount = () => {
+    console.log("In form: ", this.props.currentSmurf)
+    if (this.props.currentSmurf) {
+      const smurf = this.props.smurfs.find(
+        smurf => smurf.id === this.props.currentSmurf.id
+      )
+      this.setState({
+        name: smurf.name,
+        age: smurf.age,
+        height: smurf.height
+      })
+    }
+  }
+
   action = event => {
     event.preventDefault()
     if (this.props.action === "Add") this.props.addSmurf(this.state)
+    if (this.props.action === "Update")
+      this.props.updateSmurf(this.props.currentSmurf.id, this.state)
   }
 
   saveInput = event => {
@@ -55,11 +71,13 @@ class FriendForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    action: state.showForm
+    action: state.showForm,
+    currentSmurf: state.currentSmurf,
+    smurfs: state.smurfs
   }
 }
 
 export default connect(
   mapStateToProps,
-  { addSmurf: addSmurf }
+  { addSmurf: addSmurf, updateSmurf: updateSmurf }
 )(FriendForm)

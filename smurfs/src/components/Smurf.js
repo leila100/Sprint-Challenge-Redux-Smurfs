@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import { deleteSmurf } from "../actions"
+import { showForm, deleteSmurf } from "../actions"
 
 import {
   SmurfWrapper,
@@ -27,7 +27,10 @@ const Smurf = props => {
         </div>
       </SmurfInfo>
       <IconsWrapper>
-        <i className="fas fa-user-edit" />
+        <i
+          className="fas fa-user-edit"
+          onClick={() => props.showForm("Update", props.smurf)}
+        />
         <i
           className="fas fa-user-minus"
           onClick={() => props.deleteSmurf(props.smurf.id)}
@@ -39,5 +42,5 @@ const Smurf = props => {
 
 export default connect(
   null,
-  { deleteSmurf }
+  { showForm, deleteSmurf }
 )(Smurf)

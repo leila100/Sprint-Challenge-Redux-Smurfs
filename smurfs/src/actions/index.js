@@ -23,6 +23,8 @@ export const SAVING = "SAVING"
 export const SAVED = "SAVED"
 export const DELETING = "DELETING"
 export const DELETED = "DELETED"
+export const UPDATING = "UPDATING"
+export const UPDATED = "UPDATED"
 export const SHOW_FORM = "SHOW_FORM"
 
 export function fetchSmurfs() {
@@ -39,8 +41,8 @@ export function fetchSmurfs() {
   }
 }
 
-export function showForm(actionType) {
-  return { type: SHOW_FORM, actionType: actionType }
+export function showForm(actionType, smurf) {
+  return { type: SHOW_FORM, actionType: actionType, currentSmurf: smurf }
 }
 
 export function addSmurf(smurf) {
@@ -67,6 +69,20 @@ export function deleteSmurf(id) {
       })
       .catch(error => {
         dispatch({ type: ERROR, payload: "Can't delete the smurf!" })
+      })
+  }
+}
+
+export function updateSmurf(id, smurf) {
+  return dispatch => {
+    dispatch({ type: UPDATING })
+    axios
+      .put(`http://localhost:3333/smurfs/${id}`, smurf)
+      .then(response => {
+        dispatch({ type: UPDATED, payload: response.data })
+      })
+      .catch(error => {
+        dispatch({ type: ERROR, payload: "Can't update the smurf!" })
       })
   }
 }

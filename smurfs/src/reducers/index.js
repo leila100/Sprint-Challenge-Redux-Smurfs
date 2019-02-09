@@ -22,7 +22,9 @@ import {
   SAVED,
   SHOW_FORM,
   DELETING,
-  DELETED
+  DELETED,
+  UPDATING,
+  UPDATED
 } from "../actions"
 
 const initialState = {
@@ -32,7 +34,8 @@ const initialState = {
   updatingSmurf: false,
   deletingSmurf: false,
   error: null,
-  showForm: false
+  showForm: "",
+  currentSmurf: {}
 }
 
 /*
@@ -49,26 +52,30 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         fetchingSmurfs: true,
-        error: ""
+        error: "",
+        showForm: ""
       }
     case FETCHED:
       return {
         ...state,
         smurfs: action.payload,
         fetchingSmurfs: false,
-        error: ""
+        error: "",
+        showForm: ""
       }
     case ERROR:
       return {
         ...state,
         fetchingSmurfs: false,
-        error: action.payload
+        error: action.payload,
+        showForm: ""
       }
     case SHOW_FORM:
       return {
         ...state,
         showForm: action.actionType,
-        error: null
+        error: null,
+        currentSmurf: action.currentSmurf
       }
     case SAVING:
       return {
@@ -83,7 +90,8 @@ export default function rootReducer(state = initialState, action) {
         addingSmurf: false,
         fetchingSmurfs: false,
         error: null,
-        smurfs: action.payload
+        smurfs: action.payload,
+        showForm: ""
       }
     case DELETING:
       return {
@@ -91,7 +99,8 @@ export default function rootReducer(state = initialState, action) {
         deletingSmurf: true,
         addingSmurf: false,
         fetchingSmurfs: false,
-        error: null
+        error: null,
+        showForm: ""
       }
     case DELETED:
       return {
@@ -100,7 +109,28 @@ export default function rootReducer(state = initialState, action) {
         addingSmurf: false,
         fetchingSmurfs: false,
         error: null,
-        smurfs: action.payload
+        smurfs: action.payload,
+        showForm: ""
+      }
+    case UPDATING:
+      return {
+        ...state,
+        updatingSmurf: true,
+        deletingSmurf: false,
+        addingSmurf: false,
+        fetchingSmurfs: false,
+        showForm: ""
+      }
+    case UPDATED:
+      return {
+        ...state,
+        updatingSmurf: false,
+        deletingSmurf: false,
+        addingSmurf: false,
+        fetchingSmurfs: false,
+        error: null,
+        smurfs: action.payload,
+        showForm: ""
       }
     default:
       return state
