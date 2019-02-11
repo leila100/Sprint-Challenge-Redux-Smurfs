@@ -23,8 +23,25 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+      actions: An action is like a message that we send to the Redux store. An action is a simple object that must include a type value. The only way we can change data in Redux is through an action creator.
+
+  reducers: Reducers produce the state of the application. A Redux reducer gets to decide how each action affects the state. A reducer has an initial state, and it has a default case that handles any actions it doesn’t understand (it returns the existing state, unchanged, when it sees such an action).
+
+  store: The state of the whole application lives inside the store. When an action is dispatched, the store calls the reducer, and replaces its internal state with whatever the reducer returned. Every time the store calls the reducer, it passes in the last-known state.
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+      Application state is global, and Component state is local.
+      Redux, uses a store to hold application state. That means any component, anywhere in the app can access it.
+
+  Component state however, lives within a specific component. It can only be updated by that component and passed down to its children via props.
+
+  We should use application state whenever state needs to be shared by multiple components.
+  The more state needs to be shared between different components, the more benefit there is to using the Redux store.
+
 - [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+      redux-thunk is a middleware that looks at every action that passes through the system, and if it’s a function, it calls that function,and otherwise passes the action along to the next middleware or to the reducer.
+
+  redux-thunk allows the action-creators to make asynchronous/API calls (Axios).
 
 ## Project Set Up
 
@@ -63,11 +80,11 @@ Your finished project must include all of the following requirements:
 
 ```js
 return dispatch => {
-  dispatch({ type: FOO_ACTION_TYPE });
+  dispatch({ type: FOO_ACTION_TYPE })
   promise.then(({ data }) => {
-    dispatch({ type: ANOTHER_ACTION_TYPE, payload: data });
-  });
-};
+    dispatch({ type: ANOTHER_ACTION_TYPE, payload: data })
+  })
+}
 ```
 
 **API Design** - This is how you'll interface with the API and what is required from every endpoint.
@@ -78,14 +95,14 @@ return dispatch => {
 - [ ] Double check that your response from the server is an array of smurfs.
 
 ```js
-[
+;[
   {
-    name: 'Brainey',
+    name: "Brainey",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 0
   }
-];
+]
 ```
 
 ### POST '/smurfs'
@@ -111,20 +128,20 @@ Initially Brainey will be in the array, but it takes more than one smurf to make
 Example of object created in Smurf DB:
 
 ```js
-[
+;[
   {
-    name: 'Brainey',
+    name: "Brainey",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 0
   },
   {
-    name: 'Sleepy',
+    name: "Sleepy",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 1
   }
-];
+]
 ```
 
 ## STRETCH PROBLEM
@@ -173,10 +190,10 @@ Example:
 ```js
 output: [
   {
-    name: 'Sleepy',
+    name: "Sleepy",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 1
   }
-];
+]
 ```
